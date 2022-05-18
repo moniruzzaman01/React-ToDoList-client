@@ -3,6 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
 
 const ToDoList = () => {
   const [authUser] = useAuthState(auth);
@@ -24,7 +25,7 @@ const ToDoList = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          toast("Task Added");
+          toast.success("Task Added");
         }
       });
     event.target.reset();
@@ -45,7 +46,9 @@ const ToDoList = () => {
         <h2 className="text-5xl text-center mb-10 text-orange-400 font-bold">
           To Do List
         </h2>
-        <button className="btn btn-sm mt-[-25px]">See all task</button>
+        <Link to="/all-tasks" className="btn btn-sm mt-[-25px]">
+          See all task
+        </Link>
       </div>
       <form onSubmit={handleTaskForm}>
         <br />

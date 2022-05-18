@@ -6,6 +6,7 @@ import Signup from "./Components/Signup/Signup";
 import "react-toastify/dist/ReactToastify.css";
 import ToDoList from "./Components/Todolist/ToDoList";
 import RequireAuth from "./Components/RequireAuth/RequireAuth";
+import AllTasks from "./Components/AllTasks/AllTasks";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
               element={
                 <RequireAuth>
                   <ToDoList />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="/all-tasks"
+              element={
+                <RequireAuth>
+                  <AllTasks />
                 </RequireAuth>
               }
             ></Route>
