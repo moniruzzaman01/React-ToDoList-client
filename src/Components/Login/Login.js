@@ -6,8 +6,6 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
-import { async } from "@firebase/util";
-import SocialSignup from "../SocialSignup/SocialSignup";
 
 const Login = () => {
   const [authUser] = useAuthState(auth);
@@ -43,12 +41,14 @@ const Login = () => {
       </h2>
       <form onSubmit={handleLogin}>
         <input
+          required
           type="text"
           name="email"
           placeholder="Enter Email"
           className="input mb-5 input-bordered w-full max-w-lg"
         />
         <input
+          required
           type="text"
           name="pass"
           placeholder="Enter Password"
@@ -64,7 +64,6 @@ const Login = () => {
           </Link>
         </p>
       </form>
-      <SocialSignup />
     </div>
   );
 };

@@ -6,9 +6,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { async } from "@firebase/util";
 import { toast } from "react-toastify";
-import SocialSignup from "../SocialSignup/SocialSignup";
 
 const Signup = () => {
   const [authUser] = useAuthState(auth);
@@ -49,18 +47,21 @@ const Signup = () => {
       </h2>
       <form onSubmit={handleSignup}>
         <input
+          required
           type="text"
           name="name"
           placeholder="Your Name"
           className="input mb-5 input-bordered w-full max-w-lg"
         />
         <input
+          required
           type="text"
           name="email"
           placeholder="Enter Email"
           className="input mb-5 input-bordered w-full max-w-lg"
         />
         <input
+          required
           type="text"
           name="pass"
           placeholder="Enter Password"
@@ -76,7 +77,6 @@ const Signup = () => {
           </Link>
         </p>
       </form>
-      <SocialSignup />
     </div>
   );
 };
