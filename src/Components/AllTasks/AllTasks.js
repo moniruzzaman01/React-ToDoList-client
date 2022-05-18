@@ -13,12 +13,14 @@ const AllTasks = () => {
     isLoading,
     refetch,
   } = useQuery(["tasks", email], () =>
-    fetch(`http://localhost:5000/tasks/${email}`).then((res) => res.json())
+    fetch(
+      `https://git.heroku.com/peaceful-waters-86091.git/tasks/${email}`
+    ).then((res) => res.json())
   );
 
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/tasks/${id}`, {
+    fetch(`https://git.heroku.com/peaceful-waters-86091.git/tasks/${id}`, {
       method: "delete",
     })
       .then((res) => res.json())
