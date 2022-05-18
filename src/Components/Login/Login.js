@@ -31,22 +31,18 @@ const Login = () => {
         Login
       </h2>
       <form onSubmit={handleLogin}>
-        <label htmlFor="">Email</label>
-        <br />
         <input
           type="text"
           name="email"
+          placeholder="Enter Email"
           className="input mb-5 input-bordered w-full max-w-lg"
         />
-        <br />
-        <label htmlFor="">Password</label>
-        <br />
         <input
           type="text"
           name="pass"
+          placeholder="Enter Password"
           className="input mb-5 input-bordered w-full max-w-lg"
         />
-        <br />
         <button className="btn btn-success w-full text-white mt-5">
           login
         </button>
