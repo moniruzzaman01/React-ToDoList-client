@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
 import { async } from "@firebase/util";
+import SocialSignup from "../SocialSignup/SocialSignup";
 
 const Login = () => {
   const [SignInWithEmailAndPass, user] = useSignInWithEmailAndPassword(auth);
@@ -46,14 +47,14 @@ const Login = () => {
         <button className="btn btn-success w-full text-white mt-5">
           login
         </button>
-        <p className="text-center mt-10">
+        <p className="text-center mt-2">
           New to To Do List?{" "}
-          <Link to="/signup" className="text-primary">
+          <Link to="/signup" className=" text-orange-400">
             Create new account
           </Link>
         </p>
       </form>
-      {/* <SocialSignup /> */}
+      <SocialSignup />
     </div>
   );
 };

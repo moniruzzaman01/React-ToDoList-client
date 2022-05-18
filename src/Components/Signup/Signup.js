@@ -7,6 +7,7 @@ import {
 import auth from "../../firebase.init";
 import { async } from "@firebase/util";
 import { toast } from "react-toastify";
+import SocialSignup from "../SocialSignup/SocialSignup";
 
 const Signup = () => {
   const [createUserWithEmailAndPass, user] =
@@ -61,14 +62,14 @@ const Signup = () => {
         <button className="btn btn-success w-full text-white mt-5">
           sign up
         </button>
-        <p className="text-center mt-10">
+        <p className="text-center mt-2">
           Have an account?{" "}
-          <Link to="/login" className="text-primary">
+          <Link to="/login" className="text-orange-400">
             Login
           </Link>
         </p>
       </form>
-      {/* <SocialSignup /> */}
+      <SocialSignup />
     </div>
   );
 };

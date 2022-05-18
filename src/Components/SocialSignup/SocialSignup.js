@@ -22,7 +22,7 @@ const SocialSignup = () => {
   return (
     <div>
       <div className="flex flex-col w-full border-opacity-50">
-        <div className="divider my-14">OR</div>
+        <div className="divider my-10">OR</div>
       </div>
       <button onClick={handleGoogleSignup} className="btn btn-outline w-full">
         continue with google
