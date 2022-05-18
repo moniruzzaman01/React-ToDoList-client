@@ -12,7 +12,7 @@ import SocialSignup from "../SocialSignup/SocialSignup";
 
 const Signup = () => {
   const [authUser] = useAuthState(auth);
-  const [createUserWithEmailAndPass, user] =
+  const [createUserWithEmailAndPass, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile] = useUpdateProfile(auth);
 
@@ -28,10 +28,13 @@ const Signup = () => {
 
     await createUserWithEmailAndPass(email, pass);
     await updateProfile({ displayName: name });
-    toast.success("User Created");
 
     event.target.reset();
   };
+
+  if (error) {
+    toast.error(error.message);
+  }
 
   useEffect(() => {
     if (authUser || user) {

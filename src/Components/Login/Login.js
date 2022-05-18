@@ -11,7 +11,8 @@ import SocialSignup from "../SocialSignup/SocialSignup";
 
 const Login = () => {
   const [authUser] = useAuthState(auth);
-  const [SignInWithEmailAndPass, user] = useSignInWithEmailAndPassword(auth);
+  const [SignInWithEmailAndPass, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,8 +24,11 @@ const Login = () => {
     const pass = event.target.pass.value;
 
     await SignInWithEmailAndPass(email, pass);
-    toast.success("Login Successful");
   };
+
+  if (error) {
+    toast.error(error.message);
+  }
 
   useEffect(() => {
     if (authUser || user) {

@@ -7,10 +7,25 @@ import "react-toastify/dist/ReactToastify.css";
 import ToDoList from "./Components/Todolist/ToDoList";
 import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import AllTasks from "./Components/AllTasks/AllTasks";
+import { signOut } from "firebase/auth";
+import auth from "./firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function App() {
+  const [authUser] = useAuthState(auth);
+
   return (
     <>
+      {authUser && (
+        <button
+          onClick={async () => {
+            await signOut(auth);
+          }}
+          className=" absolute top-10 right-10 btn btn-sm btn-error text-white"
+        >
+          logout
+        </button>
+      )}
       <div className=" flex justify-center items-center h-screen text-center">
         <div className=" max-w-md w-full">
           <Routes>
