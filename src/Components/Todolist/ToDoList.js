@@ -14,7 +14,7 @@ const ToDoList = () => {
     const taskDesc = event.target.desc.value;
     const task = { userEmail, taskName, taskDesc };
 
-    await fetch(`https://git.heroku.com/peaceful-waters-86091.git/tasks`, {
+    await fetch(`https://peaceful-waters-86091.herokuapp.com/tasks`, {
       method: "post",
       headers: {
         "content-type": "application/json",
