@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import auth from "../../firebase.init";
 
 const AllTasks = () => {
   const [authUser] = useAuthState(auth);
+  const [css, setCss] = useState(false);
   const email = authUser?.email;
   const {
     data: tasks,
@@ -51,15 +52,21 @@ const AllTasks = () => {
           {tasks.map((task, key) => (
             <tr key={key}>
               <th>{key + 1}</th>
-              {/* <td>{task._id}</td> */}
-              <td>{task.taskName}</td>
-              <td>{task.taskDesc}</td>
+              {/* strike through ei feature ta last moment e mne hoise so backend er sathe connect kra hoy ni. */}
+              <td className={`${css && "line-through"} `}>{task.taskName}</td>
+              <td className={`${css && "line-through"} `}>{task.taskDesc}</td>
               <td>
                 <button
                   onClick={() => handleDelete(task._id)}
-                  className="btn btn-xs btn-error text-white"
+                  className="btn btn-xs btn-error text-white mr-2"
                 >
                   Delete
+                </button>
+                <button
+                  onClick={() => setCss(true)}
+                  className="btn btn-xs btn-success text-white"
+                >
+                  Complete
                 </button>
               </td>
             </tr>
