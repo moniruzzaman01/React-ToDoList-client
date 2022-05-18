@@ -1,13 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { toast } from "react-toastify";
+import { async } from "@firebase/util";
 
 const Login = () => {
+  const [SignInWithEmailAndPass, user] = useSignInWithEmailAndPassword(auth);
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const pass = event.target.pass.value;
+
+    await SignInWithEmailAndPass(email, pass);
+  };
+
+  useEffect(() => {
+    if (user) {
+      toast.success("Login Successful");
+      navigate("/todo");
+    }
+  }, [user, navigate]);
+
   return (
     <div className=" lg:max-w-lg md:max-w-md mx-auto my-20 px-5">
       <h2 className="text-5xl text-center mb-10 text-orange-400 font-bold">
         Login
       </h2>
-      <form>
+      <form onSubmit={handleLogin}>
         <label htmlFor="">Email</label>
         <br />
         <input

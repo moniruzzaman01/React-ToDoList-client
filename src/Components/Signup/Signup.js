@@ -29,7 +29,6 @@ const Signup = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       toast.success("User Created");
       navigate("/todo");
     }

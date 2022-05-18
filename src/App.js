@@ -8,17 +8,19 @@ import ToDoList from "./Components/Todolist/ToDoList";
 
 function App() {
   return (
-    <div className=" flex justify-center items-center h-screen text-center">
-      <div className=" max-w-md w-full">
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/todo" element={<ToDoList />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-        </Routes>
+    <>
+      <div className=" flex justify-center items-center h-screen text-center">
+        <div className=" max-w-md w-full">
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/todo" element={<ToDoList />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+          </Routes>
+        </div>
       </div>
       <ToastContainer />
-    </div>
+    </>
   );
 }
 
