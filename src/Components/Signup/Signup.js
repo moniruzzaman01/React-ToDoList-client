@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
+  useAuthState,
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
@@ -10,11 +11,14 @@ import { toast } from "react-toastify";
 import SocialSignup from "../SocialSignup/SocialSignup";
 
 const Signup = () => {
+  const [authUser] = useAuthState(auth);
   const [createUserWithEmailAndPass, user] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile] = useUpdateProfile(auth);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/todo";
 
   const handleSignup = async (event) => {
     event.preventDefault();
@@ -24,16 +28,16 @@ const Signup = () => {
 
     await createUserWithEmailAndPass(email, pass);
     await updateProfile({ displayName: name });
+    toast.success("User Created");
 
     event.target.reset();
   };
 
   useEffect(() => {
-    if (user) {
-      toast.success("User Created");
-      navigate("/todo");
+    if (authUser || user) {
+      navigate(from, { replace: true });
     }
-  }, [user, navigate]);
+  }, [authUser, user, from, navigate]);
 
   return (
     <div className=" lg:max-w-lg  md:max-w-md mx-auto my-20 px-5">

@@ -5,6 +5,7 @@ import Login from "./Components/Login/Login";
 import Signup from "./Components/Signup/Signup";
 import "react-toastify/dist/ReactToastify.css";
 import ToDoList from "./Components/Todolist/ToDoList";
+import RequireAuth from "./Components/RequireAuth/RequireAuth";
 
 function App() {
   return (
@@ -13,7 +14,14 @@ function App() {
         <div className=" max-w-md w-full">
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/todo" element={<ToDoList />}></Route>
+            <Route
+              path="/todo"
+              element={
+                <RequireAuth>
+                  <ToDoList />
+                </RequireAuth>
+              }
+            ></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
           </Routes>
