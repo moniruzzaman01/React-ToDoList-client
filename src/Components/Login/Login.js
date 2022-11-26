@@ -6,6 +6,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
+import Spinner from "../Spinner/Spinner";
 
 const Login = () => {
   const [authUser] = useAuthState(auth);
@@ -24,16 +25,18 @@ const Login = () => {
     await SignInWithEmailAndPass(email, pass);
   };
 
-  if (error) {
-    toast.error(error.message);
-  }
-
   useEffect(() => {
     if (authUser || user) {
       navigate(from, { replace: true });
     }
   }, [authUser, user, navigate, from]);
 
+  if (error) {
+    toast.error(error.message);
+  }
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div className=" lg:max-w-lg md:max-w-md mx-auto my-20 px-5">
       <h2 className="text-5xl text-center mb-10 text-orange-400 font-bold">

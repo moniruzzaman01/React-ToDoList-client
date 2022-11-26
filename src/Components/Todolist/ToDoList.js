@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import Spinner from "../Spinner/Spinner";
 
 const ToDoList = () => {
   const [authUser] = useAuthState(auth);
+  const [loading, setLoading] = useState(false);
+
   const handleTaskForm = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const userEmail = authUser.email;
     const taskName = event.target.name.value;
@@ -28,7 +32,12 @@ const ToDoList = () => {
         }
       });
     event.target.reset();
+    setLoading(false);
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className=" lg:max-w-lg md:max-w-md mx-auto my-20 px-5">

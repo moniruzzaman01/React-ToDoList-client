@@ -4,10 +4,13 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import Spinner from "../Spinner/Spinner";
 
 const AllTasks = () => {
   const [authUser] = useAuthState(auth);
   const [css, setCss] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const email = authUser?.email;
   const {
     data: tasks,
@@ -19,22 +22,23 @@ const AllTasks = () => {
     )
   );
 
-  const handleDelete = (id) => {
-    console.log(id);
-    fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks/${id}`, {
+  const handleDelete = async (id) => {
+    setLoading(true);
+    await fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks/${id}`, {
       method: "delete",
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
         if (data.deletedCount === 1) {
-          toast.success("Task Deleted");
-          refetch();
+          toast.warning("Task Deleted");
+          await refetch();
         }
       });
+    setLoading(false);
   };
 
-  if (isLoading) {
-    return;
+  if (isLoading || loading) {
+    return <Spinner />;
   }
 
   return (
