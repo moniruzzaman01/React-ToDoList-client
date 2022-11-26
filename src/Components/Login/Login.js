@@ -34,6 +34,7 @@ const Login = () => {
   if (error) {
     toast.error(error.message);
   }
+
   if (loading) {
     return <Spinner />;
   }

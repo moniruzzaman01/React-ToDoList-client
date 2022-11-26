@@ -7,6 +7,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { toast } from "react-toastify";
+import Spinner from "../Spinner/Spinner";
 
 const Signup = () => {
   const [authUser] = useAuthState(auth);
@@ -30,15 +31,19 @@ const Signup = () => {
     event.target.reset();
   };
 
-  if (error) {
-    toast.error(error.message);
-  }
-
   useEffect(() => {
     if (authUser || user) {
       navigate(from, { replace: true });
     }
   }, [authUser, user, from, navigate]);
+
+  if (error) {
+    toast.error(error.message);
+  }
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className=" lg:max-w-lg  md:max-w-md mx-auto my-20 px-5">
