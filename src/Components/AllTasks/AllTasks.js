@@ -8,7 +8,6 @@ import Spinner from "../Spinner/Spinner";
 
 const AllTasks = () => {
   const [authUser] = useAuthState(auth);
-  const [css, setCss] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const email = authUser?.email;
@@ -37,6 +36,18 @@ const AllTasks = () => {
     setLoading(false);
   };
 
+  const handleComplete = async (id) => {
+    setLoading(true);
+    await fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/complete/${id}`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data.modifiedCount === 1) {
+          await refetch();
+        }
+      });
+    setLoading(false);
+  };
+
   if (isLoading || loading) {
     return <Spinner />;
   }
@@ -57,8 +68,12 @@ const AllTasks = () => {
             <tr key={key}>
               <th>{key + 1}</th>
               {/* strike through ei feature ta last moment e mne hoise so backend er sathe connect kra hoy ni. */}
-              <td className={`${css && "line-through"} `}>{task.taskName}</td>
-              <td className={`${css && "line-through"} `}>{task.taskDesc}</td>
+              <td className={`${task.isCompleted && "line-through"} `}>
+                {task.taskName}
+              </td>
+              <td className={`${task.isCompleted && "line-through"} `}>
+                {task.taskDesc}
+              </td>
               <td>
                 <button
                   onClick={() => handleDelete(task._id)}
@@ -67,7 +82,7 @@ const AllTasks = () => {
                   Delete
                 </button>
                 <button
-                  onClick={() => setCss(true)}
+                  onClick={() => handleComplete(task._id)}
                   className="btn btn-xs btn-success text-white"
                 >
                   Complete

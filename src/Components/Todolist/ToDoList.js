@@ -16,7 +16,8 @@ const ToDoList = () => {
     const userEmail = authUser.email;
     const taskName = event.target.name.value;
     const taskDesc = event.target.desc.value;
-    const task = { userEmail, taskName, taskDesc };
+    const isCompleted = false;
+    const task = { userEmail, taskName, taskDesc, isCompleted };
 
     await fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks`, {
       method: "post",
