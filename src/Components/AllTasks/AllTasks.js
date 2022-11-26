@@ -14,14 +14,14 @@ const AllTasks = () => {
     isLoading,
     refetch,
   } = useQuery(["tasks", email], () =>
-    fetch(`https://peaceful-waters-86091.herokuapp.com/tasks/${email}`).then(
+    fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks/${email}`).then(
       (res) => res.json()
     )
   );
 
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`https://peaceful-waters-86091.herokuapp.com/tasks/${id}`, {
+    fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks/${id}`, {
       method: "delete",
     })
       .then((res) => res.json())

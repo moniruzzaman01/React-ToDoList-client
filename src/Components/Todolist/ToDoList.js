@@ -14,7 +14,7 @@ const ToDoList = () => {
     const taskDesc = event.target.desc.value;
     const task = { userEmail, taskName, taskDesc };
 
-    await fetch(`https://peaceful-waters-86091.herokuapp.com/tasks`, {
+    await fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks`, {
       method: "post",
       headers: {
         "content-type": "application/json",
