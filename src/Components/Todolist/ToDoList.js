@@ -19,7 +19,7 @@ const ToDoList = () => {
     const isCompleted = false;
     const task = { userEmail, taskName, taskDesc, isCompleted };
 
-    await fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks`, {
+    await fetch(`https://todo-test-server-blue.vercel.app/api/v1/tasks`, {
       method: "post",
       headers: {
         "content-type": "application/json",

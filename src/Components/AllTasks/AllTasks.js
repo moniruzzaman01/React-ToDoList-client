@@ -16,14 +16,14 @@ const AllTasks = () => {
     isLoading,
     refetch,
   } = useQuery(["tasks", email], () =>
-    fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks/${email}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://todo-test-server-blue.vercel.app/api/v1/tasks/${email}`
+    ).then((res) => res.json())
   );
 
   const handleDelete = async (id) => {
     setLoading(true);
-    await fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/tasks/${id}`, {
+    await fetch(`https://todo-test-server-blue.vercel.app/api/v1/tasks/${id}`, {
       method: "delete",
     })
       .then((res) => res.json())
@@ -38,7 +38,9 @@ const AllTasks = () => {
 
   const handleComplete = async (id) => {
     setLoading(true);
-    await fetch(`https://to-do-app-nine-tau.vercel.app/api/v1/complete/${id}`)
+    await fetch(
+      `https://todo-test-server-blue.vercel.app/api/v1/complete/${id}`
+    )
       .then((res) => res.json())
       .then(async (data) => {
         if (data.modifiedCount === 1) {
